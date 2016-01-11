@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface ItemDao extends CrudRepository<Item, Long> {
 
     public List<Item> findByProductId(Long productId);
