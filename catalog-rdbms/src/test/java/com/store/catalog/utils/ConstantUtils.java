@@ -5,7 +5,7 @@ public class ConstantUtils {
 	public static final String VERSION_NAME = "1.0";
 	
 	public static final String CATEGORY_DESCRIPTION = "cat_description1";
-	public static final String CATEGORY_NAME = "cat_name1";
+	public static final String CATEGOY_NAME = "cat_name1";
 	
 	public static final String PRODUCT_DESCRIPTION = "prd_description1";
 	public static final String PRODUCT_NAME = "prd_name1";

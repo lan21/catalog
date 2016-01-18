@@ -134,7 +134,7 @@ public class ItemDaoTest extends AbstractBaseDaoTestCase {
 	
 	private Category getCategory() {
 		Category category = new Category();
-        category.setName(CATEGORY_NAME);
+        category.setName(CATEGOY_NAME);
         category.setDescription(CATEGORY_DESCRIPTION);
 
         categoryDao.save(category);
