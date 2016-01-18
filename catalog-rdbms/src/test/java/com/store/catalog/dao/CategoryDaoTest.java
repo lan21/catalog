@@ -87,6 +87,7 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
         
         //add another element
         Category cat2 = new Category();
+        cat2.setId(new Random().nextLong());
         cat2.setName(ConstantUtils.CATEGORY_NAME+"2");
         cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION+"2");
         categoryDao.save(cat2);

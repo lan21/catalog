@@ -26,12 +26,12 @@ public  class Category implements AbstractBean {
     // ======================================
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,
-			generator = "category_seq_generator")
-	@SequenceGenerator(name = "category_seq_generator",
-			initialValue = 1,
-			allocationSize = 1,
-			sequenceName = "category_seq")
+//	@GeneratedValue(strategy = GenerationType.AUTO,
+//			generator = "category_seq_generator")
+//	@SequenceGenerator(name = "category_seq_generator",
+//			initialValue = 1,
+//			allocationSize = 1,
+//			sequenceName = "category_seq")
 	@Column(name = "id")
 	private Long id;
     

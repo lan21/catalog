@@ -24,12 +24,12 @@ public class Item implements AbstractBean {
     // ======================================
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO,
-			generator = "item_seq_generator")
-	@SequenceGenerator(name = "item_seq_generator",
-			initialValue = 1,
-			allocationSize = 1,
-			sequenceName = "item_seq")
+//	@GeneratedValue(strategy = GenerationType.AUTO,
+//			generator = "item_seq_generator")
+//	@SequenceGenerator(name = "item_seq_generator",
+//			initialValue = 1,
+//			allocationSize = 1,
+//			sequenceName = "item_seq")
 	@Column(name="id")
     private Long id;
 
