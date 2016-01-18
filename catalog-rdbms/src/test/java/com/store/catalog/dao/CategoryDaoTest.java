@@ -35,28 +35,62 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
 
     @Test
     public void testCreateCategory() throws Exception {
-        throw new Exception("not yet implemented");
+        categoryDao.save(category);
+        assertNotNull("primary key assigned",category.getId());
     }
 
     @Test
     public void testUpdateCategory() throws Exception {
-        throw new Exception("not yet implemented");
+        categoryDao.save(category);
+        
+        category.setName(ConstantUtils.CATEGORY_NAME + "MyTest");
+        category.setDescription(ConstantUtils.CATEGORY_DESCRIPTION + "MyTest");
+        
+        categoryDao.save(category);
+        Category catMyTest = categoryDao.findOne(category.getId());
+        assertEquals(category,catMyTest);
     }
 
     @Test
     public void testGetCategory() throws Exception {
-        throw new Exception("not yet implemented");
+        categoryDao.save(category);
+        
+        Category cat = categoryDao.findOne(category.getId());
+        
+        assertNotNull(cat);
+        assertEquals(category,cat);
     }
 
     @Test
     public void testRemoveCategory() throws Exception {
-        throw new Exception("not yet implemented");
+        categoryDao.save(category);
+        
+        Category cat = categoryDao.findOne(category.getId());
+        
+        assertNotNull(cat);
+        assertEquals(category,cat);
+        
+        categoryDao.delete(cat.getId());
+        
+        assertTrue(getIterableSize(categoryDao.findAll()) == 0);
     }
 
 
     @Test
     public void testGetCategories() throws Exception {
-        throw new Exception("not yet implemented");
+        categoryDao.save(category);
+        
+        
+        assertTrue(getIterableSize(categoryDao.findAll()) == 1);
+        
+        //add another element
+        Category cat2 = new Category();
+        cat2.setName(ConstantUtils.CATEGORY_NAME+"2");
+        cat2.setDescription(ConstantUtils.CATEGORY_DESCRIPTION+"2");
+        categoryDao.save(cat2);
+        
+        //Verify that the list contains 2 elements
+        assertTrue(getIterableSize(categoryDao.findAll()) == 2);
     }
 
     
@@ -66,7 +100,7 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
      */   
 	private void  loadCategory() {
 		category = new Category();
-		category.setName(ConstantUtils.CATEGOY_NAME);
+		category.setName(ConstantUtils.CATEGORY_NAME);
 		category.setDescription(ConstantUtils.CATEGORY_DESCRIPTION);
 	}
 

@@ -12,8 +12,9 @@ import java.util.Set;
  * This class encapsulates all the data for a category.
  *
  */
-
-
+@Entity
+@Table(name="T_CATEGORY")
+@Access(AccessType.FIELD)
 public  class Category implements AbstractBean {
 
     /**
@@ -24,17 +25,24 @@ public  class Category implements AbstractBean {
     // =             Attributes             =
     // ======================================
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO,
+			generator = "category_seq_generator")
+	@SequenceGenerator(name = "category_seq_generator",
+			initialValue = 1,
+			allocationSize = 1,
+			sequenceName = "category_seq")
+	@Column(name = "id")
 	private Long id;
     
-
+	@Column(name = "name")
 	private String name;
 
-
+	@Column(name = "description")
 	private String description;
 
 
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<Product>();
 
     // ======================================
