@@ -1,16 +1,33 @@
 package com.store.catalog.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
+@Entity
+@Table(name="T_PRODUCT")
+@Access(AccessType.FIELD)
 public  class Product implements AbstractBean {
 
     /**
@@ -21,18 +38,32 @@ public  class Product implements AbstractBean {
 	// ======================================
     // =             Attributes             =
     // ======================================
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO,
+			generator = "product_seq_generator")
+	@SequenceGenerator(name="product_seq_generator",
+			initialValue = 1,
+			allocationSize = 1,
+			sequenceName = "product_seq")
+	@Column(name="id")
     private Long id;
 
-
+	@Column(name="name")
     private String name;
 
-
+	@Column(name="description")
     private String description;
 
-
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="category_fk",
+			nullable=false)
     private Category category;
 
-
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY,
+			mappedBy="product",
+			cascade = CascadeType.ALL)
     private Set<Item> items = new HashSet<Item>();
     
  
