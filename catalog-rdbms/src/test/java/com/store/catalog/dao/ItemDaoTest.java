@@ -45,42 +45,94 @@ public class ItemDaoTest extends AbstractBaseDaoTestCase {
 
     @Test
     public void testCreateItem() throws Exception {
-        throw new Exception("not yet implemented");
+        itemDao.save(item);
+        Item createdItem = itemDao.findOne(item.getId());
+        assertNotNull(createdItem);
     }
 
 
     @Test
     public void testUpdateItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+        
+        final String NEW_NAME = "item updated";
+        final String NEW_IMG = "item image updated";
+        final double NEW_COST = 15d;
+        item.setName(NEW_NAME);
+        item.setImagePath(NEW_IMG);
+        item.setUnitCost(NEW_COST);
+        
+        itemDao.save(item);
+        
+        Item updatedItem = itemDao.findOne(item.getId());
+        
+        assertEquals(NEW_NAME,updatedItem.getName());
+        assertEquals(NEW_IMG,updatedItem.getImagePath());
+        assertEquals(NEW_COST,updatedItem.getUnitCost(),0.0001d);
     }
 
     @Test
     public void testGetItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Item foundItem = itemDao.findOne(item.getId());
+    	assertNotNull(foundItem);
+        assertEquals(item,foundItem);
     }
 
 
     @Test
     public void testRemoveItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+    	Item foundItem = itemDao.findOne(item.getId());
+    	assertNotNull(foundItem);
+    	
+    	itemDao.delete(item);
+    	assertEquals("Effectively removed",0,getIterableSize(itemDao.findAll()));
     }
 
 
     @Test
     public void testGetItems() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);
+        
+        assertEquals("Only one element",1,getIterableSize(itemDao.findAll()));
+        
+        Item item2 = getAnotherItem();
+        
+        itemDao.save(item2);
+        
+        assertEquals("Now two element",2,getIterableSize(itemDao.findAll()));
     }
 
 
     @Test
     public void testGetItemsWithProductId() throws Exception {
-        throw new Exception("not yet implemented");
-    }
+    	itemDao.save(item);       
+        Item item2 = getAnotherItem();
+        item2.setProduct(item.getProduct());
+        itemDao.save(item2);
+        
+        Item item3 = getAnotherItem();
+        Product product2 = getProduct("prod2", "product 2");
+        item3.setProduct(product2);
+        itemDao.save(item3);
+        
+        assertEquals("itemDao have 3 element",3,getIterableSize(itemDao.findAll()));
+        assertEquals("Only two items of product 1",2,getIterableSize(itemDao.findByProductId(item.getProduct().getId())));
+        assertEquals("Only one item of product 2",1,getIterableSize(itemDao.findByProductId(item3.getProduct().getId())));
+    }    
 
 
     @Test
     public void testSearchItem() throws Exception {
-        throw new Exception("not yet implemented");
+    	itemDao.save(item);       
+        Item item2 = getAnotherItem();
+        item2.setProduct(item.getProduct());
+        itemDao.save(item2);
+        
+        assertEquals(2,getIterableSize(itemDao.findByNameContaining(ITEM_NAME)));
+        assertEquals(1,getIterableSize(itemDao.findByNameContaining(ITEM_NAME + "2")));
+        
     }
     
     

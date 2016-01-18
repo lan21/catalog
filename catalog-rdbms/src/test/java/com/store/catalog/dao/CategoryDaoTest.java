@@ -36,6 +36,11 @@ public class CategoryDaoTest  extends AbstractBaseDaoTestCase{
 
 
     @Test
+    @Deprecated
+    /**
+     * @deprecated now, the id is given and is no more auto-generated
+     * @throws Exception
+     */
     public void testCreateCategory() throws Exception {
         categoryDao.save(category);
         assertNotNull("primary key assigned",category.getId());
